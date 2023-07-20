@@ -6,24 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="../static/css/login.css">
+
 </head>
 
 <body>
     <div class="head">
         <div class="banner">
-            <a href=""><img src="" alt="图标"></a>
+{#            导航栏#}
+            {% include 'navigation.html' %}
         </div>
     </div>
 
     <div>首页</div>
-        {% if username == 'l' %}
-            {% include 'userhome.html' %}
-            <div>欢迎{{ username }}</div>
-            <a href='/unlogin/'>注销</a>
-        {% else %}
-    <div class="body">
-        <a href='/login'>点此登录</a>
-    {% endif %}
+    <div>首页</div>
+    <div>首页</div>
+
 
 
 </div>

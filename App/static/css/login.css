@@ -33,3 +33,9 @@ h2 {
     display: flex;
     justify-content: space-evenly;
 }
+
+.navigation {
+    position: fixed;
+    height: 30px;
+    background-color: #5080df;
+}
