@@ -4,16 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ username }}的主页</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+
 </head>
 <body>
 <div class="banner">
 {#            导航栏#}
             {% include 'navigation.html' %}
         </div>
-{{ username }}的主页
-{{ username }}的主页
-{{ username }}的主页
-{{ username }}的主页
+{% for msg in messages %}
+
+{#     <a href="/postings/">{{ msg.title }}</a>#}
+
+    <script>
+        var title = "{{ msg.title }}";
+        var text = "{{ msg.text }}";
+        var temp = document.getElementsByTagName('body')
+        var link = document.createElement('a');
+        var queryString = "title=" + encodeURIComponent(title) + "&text=" + encodeURIComponent(text);
+        link.href = "/postings?" + queryString;
+        link.innerHTML="{{ msg.title }}"
+        temp[0].appendChild(link)
+        temp[0].appendChild(document.createElement('br'))
+    </script>
+{% endfor %}
 
 </body>
 </html>

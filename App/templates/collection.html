@@ -2,14 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>收藏</title>
+    <title>{{ username }}收藏</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+
 </head>
 <body>
 <div class="banner">
 {% include 'navigation.html' %}
 </div>
-<div>{{ username }}的收藏</div>
-<div>{{ username }}的收藏</div>
-<div>{{ username }}的收藏</div>
+{% for msg in messages %}
+
+{#     <a href="/postings/">{{ msg.title }}</a>#}
+
+    <script>
+        var title = "{{ msg.title }}";
+        var text = "{{ msg.text }}";
+        var temp = document.getElementsByTagName('body')
+        var link = document.createElement('a');
+        var queryString = "title=" + encodeURIComponent(title) + "&text=" + encodeURIComponent(text);
+        link.href = "/postings/?" + queryString;
+        link.innerHTML="{{ msg.title }}"
+        temp[0].appendChild(link)
+        temp[0].appendChild(document.createElement('br'))
+    </script>
+{% endfor %}
 </body>
 </html>

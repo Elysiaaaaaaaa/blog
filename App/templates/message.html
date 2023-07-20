@@ -1,4 +1,6 @@
-<div class="message">
-    {{ message.title }}
-    {{ message.text }}
-</div>
+<a href="/postings/{{ message.title }}" class="message">
+    <div>
+        {{ message.title }}
+        {{ message.text }}
+    </div>
+</a>

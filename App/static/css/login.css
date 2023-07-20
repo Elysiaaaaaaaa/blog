@@ -34,10 +34,14 @@ h2 {
     justify-content: space-evenly;
 }
 
+.banner {
+    height: 50px;
+}
+
 .navigation {
+    background-color: aquamarine;
     position: fixed;
-    /* height: 30px; */
-    background-color: #5080df;
+    font-size: 30px;
 }
 
 .message {

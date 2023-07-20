@@ -4,30 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="../static/css/home.css">
+    <title>主页</title>
     <link rel="stylesheet" href="../static/css/login.css">
 
 </head>
 
 <body>
-    <div class="head">
-        <div class="banner">
-{#            导航栏#}
-            {% include 'navigation.html' %}
-        </div>
-    </div>
+
+
+    {# 导航栏#}
+    {% include 'navigation.html' %}
 
     <div>首页</div>
     <div>首页</div>
     <div>首页</div>
-    {% if message %}
-        <p>???</p>
-        {% include 'message.html' %}
-    {% endif %}
+    {% for msg in messages %}
 
-
-</div>
+    <script>
+        var title = "{{ msg.title }}";
+        var text = "{{ msg.text }}";
+        var temp = document.getElementsByTagName('body')
+        var link = document.createElement('a');
+        var queryString = "title=" + encodeURIComponent(title);
+        link.href = "/postings/?" + queryString;
+        link.innerHTML = "{{ msg.title }}"
+        temp[0].appendChild(link)
+        temp[0].appendChild(document.createElement('br'))
+    </script>
+    {% endfor %}
 </body>
 
 </html>
