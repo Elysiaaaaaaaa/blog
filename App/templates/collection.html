@@ -11,15 +11,12 @@
 {% include 'navigation.html' %}
 </div>
 {% for msg in messages %}
-
-{#     <a href="/postings/">{{ msg.title }}</a>#}
-
     <script>
         var title = "{{ msg.title }}";
         var text = "{{ msg.text }}";
         var temp = document.getElementsByTagName('body')
         var link = document.createElement('a');
-        var queryString = "title=" + encodeURIComponent(title) + "&text=" + encodeURIComponent(text);
+        var queryString = "title=" + encodeURIComponent(title);
         link.href = "/postings/?" + queryString;
         link.innerHTML="{{ msg.title }}"
         temp[0].appendChild(link)

@@ -15,7 +15,31 @@
     </div>
     {{ messages.title }}
     {{ messages.text }}
+    <script>
+        var title = "{{ messages.title }}";
+        var temp = document.getElementsByTagName('body')
+        var link1 = document.createElement('a');
+        var link2 = document.createElement('a');
+        var queryString = "title=" + encodeURIComponent(title);
+        link1.href = "/starplus/?" + queryString;
+        link2.href = "/collectionplus/?" + queryString;
+        link1.innerHTML = "点赞"
+        link2.innerHTML = "收藏"
+        temp[0].appendChild(link1)
+        temp[0].appendChild(link2)
+    </script>
     {{ messages.writer }}
+    {{ messages.star }}
+    {% for review in messages.review %}
+    <p>评论:{{ review.speak }}</p>
+    <p>用户:{{ review.reader }}</p>
+    {% endfor %}
+
+    <form action="" method="post">
+        <input type="text" name="review">
+        <button>评论</button>
+    </form>
+
 </body>
 
 </html>

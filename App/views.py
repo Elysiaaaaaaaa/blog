@@ -14,6 +14,7 @@ class user:
         self.name = username
         self.password = password
         self.essay = []
+        self.collection = []
         users[username] = self
 
 
@@ -38,11 +39,13 @@ class essay:
         self.text = es['text']
         self.writer = es['writer']
         self.review = es['review']
-        essays[self.title] = {'title': es['title'], 'text': es['text'], 'writer': es['writer'], 'review': es['review']}
+        self.star = 0
+        essays[self.title] = {'title': es['title'], 'text': es['text'], 'writer': es['writer'], 'review': es['review'], 'star': 0}
         user.finduser(es['writer']).essay.append({'title': es['title'], 'text': es['text'], 'writer': es['writer'], 'review': es['review']})
 
 
 blue = Blueprint('user', __name__)
+
 # 首页
 @blue.route('/home/')
 @blue.route('/')
@@ -56,7 +59,7 @@ def home():
 @blue.route('/collection/')
 def collection():
     username = request.cookies.get('user')
-    user_message = users[username].essay
+    user_message = users[username].collection
     return render_template('collection.html', username=username, messages=user_message)
 
 
@@ -103,7 +106,7 @@ def edit():
     else:
         title = request.form.get('title')
         text = request.form.get('text')
-        temp = {'title': title, 'text': text, 'writer': username}
+        temp = {'title': title, 'text': text, 'writer': username, 'review': []}
         essay(temp)
         return render_template('edit.html', username=username)
 
@@ -117,18 +120,54 @@ def userhome():
 
 
 #帖子
-@blue.route('/postings/')
+@blue.route('/postings/', methods=['GET', 'POST'])
 def postings():
     username = request.cookies.get('user')
     title = request.args.get('title')
+
+    if request.method == 'GET':
+        print(title)
+        message = {
+            'title': title,
+            'text': essays[title]['text'],
+            'writer': essays[title]['writer'],
+            'review': essays[title]['review'],
+            'star': essays[title]['star']
+        }
+        print(message)
+        print(type(message['review']))
+        return render_template('postings.html', username=username, messages=message)
+    if request.method == 'POST':
+        review = request.form.get('review')
+        print(review)
+        essays[title]['review'].append({'reader': username, 'speak': review})
+        re = redirect(request.url)
+        return re
+
+
+@blue.route('/starplus/')
+def starplus():
+    title = request.args.get('title')
+    print(request.url)
     print(title)
-    message = {
-        'title':title,
-        'text':essays[title]['text'],
-        'writer':essays[title]['writer']
-    }
-    print(message)
-    return render_template('postings.html', messages=message, username=username)
+    print('star')
+    essays[title]['star'] += 1
+    url = request.url.replace('starplus', 'postings')
+    re = redirect(url)
+    return re
+
+@blue.route('/collectionplus/')
+def collectionplus():
+    title = request.args.get('title')
+    username = request.cookies.get('user')
+    print(request.url)
+    print(title)
+    print('collection')
+    users[username].collection.append(essays[title])
+    print(users[username].collection)
+    url = request.url.replace('collectionplus', 'postings')
+    re = redirect(url)
+    return re
 
 
 # 注销
