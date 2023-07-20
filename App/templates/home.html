@@ -21,7 +21,10 @@
     <div>首页</div>
     <div>首页</div>
     <div>首页</div>
-
+    {% if message %}
+        <p>???</p>
+        {% include 'message.html' %}
+    {% endif %}
 
 
 </div>

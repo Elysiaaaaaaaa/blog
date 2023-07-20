@@ -12,7 +12,12 @@ blue = Blueprint('user', __name__)
 @blue.route('/')
 def home():
     username = request.cookies.get('user')
-    return render_template('home.html', username=username)
+    message = {
+        'title': '标题',
+        'text': '内容'
+    }
+
+    return render_template('home.html', username=username, message=message)
 
 @blue.route('/collection/')
 def collection():
