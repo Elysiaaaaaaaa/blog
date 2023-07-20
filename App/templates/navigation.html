@@ -1,0 +1,22 @@
+{#导航栏#}
+
+{% block navigator %}
+
+    <div class="navigation">
+    <a href='/home/'>首页</a>
+
+        {#已登录#}
+        {% if username == 'l' %}
+{#跳转#}
+            <a href='/collection/'>收藏</a>
+            <a href='/edit/'>发布</a>
+            <a href='/userhome/'>我的主页</a>
+            <a href='/unlogin/'>注销</a>
+{#未登录#}
+        {% else %}
+            <a href='/login'>点此登录</a>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
