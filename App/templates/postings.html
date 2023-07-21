@@ -16,17 +16,34 @@
     {{ messages.title }}
     {{ messages.text }}
     <script>
+
         var title = "{{ messages.title }}";
         var temp = document.getElementsByTagName('body')
-        var link1 = document.createElement('a');
-        var link2 = document.createElement('a');
         var queryString = "title=" + encodeURIComponent(title);
+
+        var link1 = document.createElement('a');
         link1.href = "/starplus/?" + queryString;
-        link2.href = "/collectionplus/?" + queryString;
         link1.innerHTML = "点赞"
-        link2.innerHTML = "收藏"
         temp[0].appendChild(link1)
+
+        var link1 = document.createElement('a');
+        link1.href = "/KeyboardMan/?" + queryString;
+        link1.innerHTML = "点踩"
+        temp[0].appendChild(link1)
+
+        var flag = "{{ messages.col }}"
+        var colString;
+        var link2 = document.createElement('a');
+        if ( flag === 'True'){
+            colString = "/collectiondown/?"
+            link2.innerHTML = "取消收藏"
+        }else {
+            colString = "/collectionplus/?"
+            link2.innerHTML = "收藏"
+        }
+        link2.href = colString + queryString;
         temp[0].appendChild(link2)
+
     </script>
     {{ messages.writer }}
     {{ messages.star }}

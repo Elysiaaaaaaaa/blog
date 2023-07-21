@@ -17,7 +17,6 @@ class user:
         self.collection = []
         users[username] = self
 
-
     @staticmethod
     def log(username, password):
         if username in users.keys():
@@ -25,12 +24,8 @@ class user:
                 return True
         return False
 
-    @staticmethod
-    def finduser(username):
-        for user in users.values():
-            if user.name == username:
-                return user
-        return None
+
+u1 = user('1', '1')
 
 
 class essay:
@@ -40,11 +35,12 @@ class essay:
         self.writer = es['writer']
         self.review = es['review']
         self.star = 0
-        essays[self.title] = {'title': es['title'], 'text': es['text'], 'writer': es['writer'], 'review': es['review'], 'star': 0}
-        user.finduser(es['writer']).essay.append({'title': es['title'], 'text': es['text'], 'writer': es['writer'], 'review': es['review']})
+        essays[self.title] = self
+        users[es['writer']].essay.append(es['title'])
 
 
 blue = Blueprint('user', __name__)
+
 
 # 首页
 @blue.route('/home/')
@@ -53,7 +49,7 @@ def home():
     username = request.cookies.get('user')
     print(type(essays.values()))
     print(essays.values())
-    return render_template('home.html', username=username, messages=essays.values())
+    return render_template('home.html', username=username, messages=essays.keys())
 
 
 @blue.route('/collection/')
@@ -97,6 +93,7 @@ def register():
         re.set_cookie('user', username)
         return re
 
+
 # 编辑
 @blue.route('/edit/', methods=['GET', 'POST'])
 def edit():
@@ -115,32 +112,31 @@ def edit():
 @blue.route('/userhome/')
 def userhome():
     username = request.cookies.get('user')
-    self_essays = user.finduser(username).essay
+    self_essays = users[username].essay
     return render_template('userhome.html', username=username, messages=self_essays)
 
 
-#帖子
+# 帖子
 @blue.route('/postings/', methods=['GET', 'POST'])
 def postings():
     username = request.cookies.get('user')
     title = request.args.get('title')
-
     if request.method == 'GET':
-        print(title)
         message = {
             'title': title,
-            'text': essays[title]['text'],
-            'writer': essays[title]['writer'],
-            'review': essays[title]['review'],
-            'star': essays[title]['star']
+            'text': essays[title].text,
+            'writer': essays[title].writer,
+            'review': essays[title].review,
+            'star': essays[title].star,
+            'col': False
         }
-        print(message)
-        print(type(message['review']))
+        if username:
+            if essays[title].title in users[username].collection:
+                message['col'] = True
         return render_template('postings.html', username=username, messages=message)
     if request.method == 'POST':
         review = request.form.get('review')
-        print(review)
-        essays[title]['review'].append({'reader': username, 'speak': review})
+        essays[title].review.append({'reader': username, 'speak': review})
         re = redirect(request.url)
         return re
 
@@ -148,24 +144,47 @@ def postings():
 @blue.route('/starplus/')
 def starplus():
     title = request.args.get('title')
-    print(request.url)
-    print(title)
-    print('star')
-    essays[title]['star'] += 1
-    url = request.url.replace('starplus', 'postings')
-    re = redirect(url)
-    return re
+    username = request.cookies.get('user')
+    print(username)
+    if username:
+        essays[title].star += 1
+        url = request.url.replace('starplus', 'postings')
+        re = redirect(url)
+        return re
+    return render_template('login.html')
+
+@blue.route('/KeyboardMan/')
+def KeyboardMan():
+    title = request.args.get('title')
+    username = request.cookies.get('user')
+    print(username)
+    if username:
+        essays[title].star -= 1
+        url = request.url.replace('KeyboardMan', 'postings')
+        re = redirect(url)
+        return re
+    return render_template('login.html')
+
+
+
 
 @blue.route('/collectionplus/')
 def collectionplus():
     title = request.args.get('title')
     username = request.cookies.get('user')
-    print(request.url)
-    print(title)
-    print('collection')
-    users[username].collection.append(essays[title])
-    print(users[username].collection)
-    url = request.url.replace('collectionplus', 'postings')
+    if username:
+        users[username].collection.append(title)
+        url = request.url.replace('collectionplus', 'postings')
+        re = redirect(url)
+        return re
+    return render_template('login.html')
+
+@blue.route('/collectiondown/')
+def collectiondown():
+    title = request.args.get('title')
+    username = request.cookies.get('user')
+    users[username].collection.remove(title)
+    url = request.url.replace('collectiondown', 'postings')
     re = redirect(url)
     return re
 
