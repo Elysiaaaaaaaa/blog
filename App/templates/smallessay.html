@@ -1,0 +1,14 @@
+{% block smallessay %}
+    {% for msg in messages %}
+    <script>
+        var title = "{{ msg }}";
+        var temp = document.getElementsByTagName('body')
+        var link = document.createElement('a');
+        var queryString = "title=" + encodeURIComponent(title);
+        link.href = "/postings/?" + queryString;
+        link.innerHTML="{{ msg }}"
+        temp[0].appendChild(link)
+        temp[0].appendChild(document.createElement('br'))
+    </script>
+{% endfor %}
+{% endblock %}

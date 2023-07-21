@@ -14,20 +14,8 @@
 
     {# 导航栏#}
     {% include 'navigation.html' %}
-    {% for msg in messages %}
-
-    <script>
-        var title = "{{ msg.title }}";
-        var text = "{{ msg.text }}";
-        var temp = document.getElementsByTagName('body')
-        var link = document.createElement('a');
-        var queryString = "title=" + encodeURIComponent(title);
-        link.href = "/postings/?" + queryString;
-        link.innerHTML = "{{ msg.title }}"
-        temp[0].appendChild(link)
-        temp[0].appendChild(document.createElement('br'))
-    </script>
-    {% endfor %}
+    <h1>网站主页</h1>
+    {% include 'smallessay.html' %}
 </body>
 
 </html>
