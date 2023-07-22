@@ -1,0 +1,18 @@
+
+
+
+.post {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1500px;
+}
+
+.post div,
+p {
+    width: 1500px;
+}
+
+.title {
+    display: block;
+    font-size: 50px;
+}

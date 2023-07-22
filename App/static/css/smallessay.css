@@ -1,0 +1,15 @@
+.essay {
+    width: 900px;
+    display: flex;
+    margin: 0 auto;
+    align-content: start;
+    flex-wrap: wrap;
+}
+
+.essay a {
+    border: 1px solid black;
+    display: block;
+    width: 900px;
+    height: 200px;
+    font-size: 30px;
+}
