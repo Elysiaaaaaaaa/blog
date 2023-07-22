@@ -36,14 +36,61 @@ h2 {
 
 .banner {
     height: 50px;
+    display: flex;
+    background-color: aquamarine;
+    justify-content: center;
 }
 
 .navigation {
-    background-color: aquamarine;
+    display: flex;
+    height: 50px;
+    width: 1500px;
     position: fixed;
     font-size: 30px;
+    justify-content: space-between;
 }
+
+.navigation a {
+    display: block;
+    height: 50px;
+    /* width: 1000px; */
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
 
 .message {
     border: 1px solid #5080df;
+}
+
+.essay {
+    width: 900px;
+    display: flex;
+    align-content: start;
+    flex-wrap: wrap;
+}
+
+.essay a {
+    border: 1px solid black;
+    display: block;
+    width: 900px;
+    height: 200px;
+    font-size: 30px;
+}
+
+.post {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1500px;
+}
+
+.post div,
+p {
+    width: 1500px;
+}
+
+.title {
+    display: block;
+    font-size: 50px;
 }

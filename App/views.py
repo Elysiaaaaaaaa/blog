@@ -47,8 +47,6 @@ blue = Blueprint('user', __name__)
 @blue.route('/')
 def home():
     username = request.cookies.get('user')
-    print(type(essays.values()))
-    print(essays.values())
     return render_template('home.html', username=username, messages=essays.keys())
 
 
@@ -85,13 +83,14 @@ def register():
     else:
         username = request.form.get('username')
         password = request.form.get('password')
-        print('注册成功')
-        print(username)
-        print(password)
-        users[username] = user(username, password)
-        re = redirect('/home/')
-        re.set_cookie('user', username)
-        return re
+        if username in users.keys():
+            return render_template('register.html', info=True)
+        else:
+            users[username] = user(username, password)
+            re = redirect('/home/')
+            re.set_cookie('user', username)
+            return re
+
 
 
 # 编辑
@@ -122,6 +121,7 @@ def postings():
     username = request.cookies.get('user')
     title = request.args.get('title')
     if request.method == 'GET':
+        print("11111111")
         message = {
             'title': title,
             'text': essays[title].text,
@@ -130,15 +130,17 @@ def postings():
             'star': essays[title].star,
             'col': False
         }
-        if username:
-            if essays[title].title in users[username].collection:
-                message['col'] = True
+        if username and title in users[username].collection:
+            message['col'] = True
         return render_template('postings.html', username=username, messages=message)
     if request.method == 'POST':
-        review = request.form.get('review')
-        essays[title].review.append({'reader': username, 'speak': review})
-        re = redirect(request.url)
-        return re
+        if username:
+            review = request.form.get('review')
+            essays[title].review.append({'reader': username, 'speak': review})
+            re = redirect(request.url)
+            return re
+        else:
+            return render_template('login.html')
 
 
 @blue.route('/starplus/')

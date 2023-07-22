@@ -13,14 +13,25 @@
         {# 导航栏#}
         {% include 'navigation.html' %}
     </div>
+
+    <div class="post">
+    <div class="title">
     {{ messages.title }}
+    </div>
+    <br>
+    <div class="text" >
     {{ messages.text }}
+    </div>
+    <div>
+        作者:{{ messages.writer }}
+    点赞数:{{ messages.star }}
+    </div>
+    <div class="review"></div>
+
     <script>
-
         var title = "{{ messages.title }}";
-        var temp = document.getElementsByTagName('body')
+        var temp = document.getElementsByClassName('review')
         var queryString = "title=" + encodeURIComponent(title);
-
         var link1 = document.createElement('a');
         link1.href = "/starplus/?" + queryString;
         link1.innerHTML = "点赞"
@@ -34,10 +45,10 @@
         var flag = "{{ messages.col }}"
         var colString;
         var link2 = document.createElement('a');
-        if ( flag === 'True'){
+        if (flag === 'True') {
             colString = "/collectiondown/?"
             link2.innerHTML = "取消收藏"
-        }else {
+        } else {
             colString = "/collectionplus/?"
             link2.innerHTML = "收藏"
         }
@@ -45,18 +56,19 @@
         temp[0].appendChild(link2)
 
     </script>
-    {{ messages.writer }}
-    {{ messages.star }}
     {% for review in messages.review %}
-    <p>评论:{{ review.speak }}</p>
-    <p>用户:{{ review.reader }}</p>
+    <p>评论:{{ review.speak }}
+        <br>
+    用户:{{ review.reader }}</p>
+        <br>
     {% endfor %}
-
+    <div>
     <form action="" method="post">
-        <input type="text" name="review">
+        <input type="text" name="review" placeholder="留下你的评论">
         <button>评论</button>
     </form>
-
+    </div>
+</div>
 </body>
 
 </html>

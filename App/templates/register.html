@@ -5,9 +5,11 @@
     <title>注册</title>
 </head>
 <body>
-
     <form action="" class="table" method="post">
         <p>用户名:<input type="text" name="username"></p>
+        {% if info %}
+            <p>用户名已被使用</p>
+        {% endif %}
         <p>密码:<input type="password" name="password"></p>
         <input type="submit" value="注册">
     </form>
