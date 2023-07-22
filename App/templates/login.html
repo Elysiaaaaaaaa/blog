@@ -26,7 +26,7 @@
 
     <form action="" class="table" method="post">
         <p>账户:<input type="text" name="username"></p>
-        {% if err=='error' %}
+        {% if err %}
             <p>密码错误</p>
         {% endif %}
         <p>密码:<input type="password" name="password"></p>

@@ -66,11 +66,15 @@ def login():
     else:
         username = request.form.get('username')
         password = request.form.get('password')
+        print(username)
+        print(password)
         if user.log(username, password):
+            print('ss')
             re = redirect('/home/')
             re.set_cookie('user', username)
             return re
         else:
+            print('cc')
             return render_template('login.html', err='error')
 
 
@@ -140,7 +144,8 @@ def postings():
             re = redirect(request.url)
             return re
         else:
-            return render_template('login.html')
+            re = redirect('/login')
+            return re
 
 
 @blue.route('/starplus/')
@@ -153,7 +158,8 @@ def starplus():
         url = request.url.replace('starplus', 'postings')
         re = redirect(url)
         return re
-    return render_template('login.html')
+    re = redirect('/login')
+    return re
 
 @blue.route('/KeyboardMan/')
 def KeyboardMan():
@@ -165,7 +171,8 @@ def KeyboardMan():
         url = request.url.replace('KeyboardMan', 'postings')
         re = redirect(url)
         return re
-    return render_template('login.html')
+    re = redirect('/login')
+    return re
 
 
 
@@ -179,7 +186,8 @@ def collectionplus():
         url = request.url.replace('collectionplus', 'postings')
         re = redirect(url)
         return re
-    return render_template('login.html')
+    re = redirect('/login')
+    return re
 
 @blue.route('/collectiondown/')
 def collectiondown():
