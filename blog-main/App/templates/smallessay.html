@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    {% for msg in messages %}
+    <script>
+            var contanier = document.createElement("div");//设置外层盒子
+            contanier.className = "essay-container";
+            var essay_a = document.createElement("a")//链接
+            essay_a.className = "essay";
+            var essay_box = document.createElement("div")//文字内容
+            essay_box.className = "essay-box";
+            var title = document.createElement("div");
+            title.className = "essay_title"
+            title.innerText = "{{ msg['title'] }}";//标题
+            var introduce = document.createElement("div");
+            introduce.innerText = "{{ msg['introduce'] }}";//简介
+            introduce.className = "essay_intro";
+            essay_box.appendChild(title);
+            essay_box.appendChild(introduce);
+            essay_a.appendChild(essay_box);
+            essay_a.href = "/postings/?title=" + encodeURIComponent("{{ msg['title'] }}");
+            contanier.appendChild(essay_a);
+            document.body.appendChild(contanier);
+    </script>
+    {% endfor %}
+</body>
+
+</html>
