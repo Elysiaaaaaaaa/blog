@@ -1,0 +1,43 @@
+.navigation {
+  background-color: #f2f2f2;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  /* 水平居中 */
+  align-items: center;
+  /* 垂直居中 */
+}
+
+.navigation a {
+  color: #333;
+  text-decoration: none;
+  margin-right: 10px;
+  font-size: 30px;
+  /* 设置字体大小为16像素 */
+  letter-spacing: 2px;
+  margin-left: 10px;
+}
+
+.navigation a:hover {
+  color: #ff0000;
+}
+
+
+
+.collection,
+.edit,
+.userhome {
+  color: #666;
+}
+
+.log_login,
+.log_register {
+  background-color: #ff0000;
+  color: #fff;
+  padding: 5px 10px;
+}
+
+.log_login:hover,
+.log_register:hover {
+  background-color: #cc0000;
+}

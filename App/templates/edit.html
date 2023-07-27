@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>编辑</title>
+    <link rel="stylesheet" href="../static/css/navigation.css">
+    <link rel="stylesheet" href="../static/css/edit.css">
+</head>
+
+<body>
+    {% include 'navigation.html' %}
+  <h1>发布</h1>
+
+    <form action="" method="post">
+        <div class="edit">
+            <div class="label-container">
+                <label for="title">文章标题：</label>
+                <input type="text" id="title" name="title" class="edit_title">
+            </div>
+            <div class="label-container">
+                <label for="introduce">内容简介：</label>
+                <input type="text" id="introduce" name="introduce" class="edit_text">
+            </div>
+            <div class="label-container">
+                <label for="content">编辑内容：</label>
+                <textarea cols="40" rows="20" id="content" name="content"></textarea>
+            </div>
+            <button type="submit">发布</button>
+        </div>
+    </form>
+
+</body>
+
+</html>

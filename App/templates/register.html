@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="../static/css/register.css">
+</head>
+<body>
+    <div class="container">
+        <form action="" class="login-form" method="post">
+            <h2>欢迎注册</h2>
+            <div>用户名:<input type="text" name="username"></div>
+        {% if info %}
+            <div>此用户名已被占用!</div>
+        {% endif %}
+            <div>密码:<input type="password" name="password"></div>
+            <input type="submit" value="注册">
+        </form>
+    </div>
+</body>
+</html>

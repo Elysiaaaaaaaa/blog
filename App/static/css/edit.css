@@ -1,0 +1,63 @@
+/* edit.css */
+
+.edit {
+  font-weight: bold;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.edit_title,
+.edit_text,
+#content {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+label {
+  text-align: left;
+  display: block;
+}
+
+button {
+  background-color: #ff0000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .edit {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .edit_title,
+  .edit_text,
+  #content {
+    width: 100%;
+  }
+}
+
+.label-container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 5px;
+}
+
+.label-container label {
+  flex: 0 0 100px;
+  text-align: left;
+  padding-right: 10px;
+  font-size: 20px;
+}
+
+.label-container input,
+.label-container textarea {
+  flex: 1;
+  font-size: 16px
+}
